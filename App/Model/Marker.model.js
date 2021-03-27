@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const markerSchema = mongoose.Schema({
     kalimat : {type : String, required : true},
-    buku : {type: mongoose.Schema.Types.ObjectId, required:true}
+    idbuku : {type: mongoose.Schema.Types.ObjectId, required:true}
 },
 {
     collection : "marker"

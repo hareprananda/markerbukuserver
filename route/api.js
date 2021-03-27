@@ -5,15 +5,16 @@ const router = express.Router();
 
 router.get("/buku", BukuController.showBuku);
 router.get("/buku/:id", BukuController.singleBuku);
-router.put("/buku",BukuController.updateBuku);
+router.put("/buku/:id",BukuController.updateBuku);
 router.post("/buku",BukuController.tambahBuku);
-router.delete("/buku",BukuController.deleteBuku);
+router.delete("/buku/:id",BukuController.deleteBuku);
 
 router.get("/marker", BukuController.showMarker);
-router.get("/marker/:id", BukuController.singleMarker);
-router.put("/marker",BukuController.updateMarker);
+router.get("/marker/:idbuku/:id", BukuController.singleMarker);
+router.get("/marker/:idbuku", BukuController.bukuMarker);
+router.put("/marker/:id",BukuController.updateMarker);
 router.post("/marker",BukuController.tambahMarker);
-router.delete("/marker",BukuController.deleteMarker);
+router.delete("/marker/:id",BukuController.deleteMarker);
 
 router.post("/user",UserController.tambahUser);
 

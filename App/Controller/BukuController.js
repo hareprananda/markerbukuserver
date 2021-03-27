@@ -1,6 +1,7 @@
 import BukuModel from "../Model/Buku.model.js";
 import UserModel from "../Model/User.model.js";
 import Helper from "../Database/Helper.js";
+import MarkerModel from "../Model/Marker.model.js";
 
 const BukuController =  {
     async showBuku(req,res) {
@@ -46,28 +47,66 @@ const BukuController =  {
         })
         
     },
-    updateBuku(req,res){
+    async updateBuku(req,res){
       
-        
+        const {id} = req.params;
+        const body = req.body;
+        const update = await BukuModel.updateOne({"_id" : id}, body).exec();
+        if(!update)
+            return res.status(404).send("Not found");
+
+        return res.json(update);
 
       
     },
-    deleteBuku(req,res){
+    async deleteBuku(req,res){
+
+        const {id} = req.params;
+
+        const hapus = BukuModel.deleteOne({"_id":id}).exec();
+
+        if(!hapus)
+            return res.status(500).send("Hapus Buku Gagal")
 
     },
-
-
-
-
-
-    showMarker(req,res) {
+    async showMarker(req,res) {
        
+        const {page} = req.query;
+        const data =  await Helper.pagination({
+            model : MarkerModel,
+            perPage : 10,
+            page : page
+        });
+        res.json(data);
+
         
     },
-    singleMarker(req,res){
+    async singleMarker(req,res){
 
+        const {id} = req.params;
+
+        const data = await MarkerModel.findOne({"_id": id}).exec();
+        if(!data)
+            return res.status(404).send("Data tidak ditemukan");
+
+        return res.json(data);
+
+        
         res.json(req.params)
     },
+
+    async bukuMarker(req,res){
+
+        const {idbuku}  = req.params;
+        
+        const data = await MarkerModel.find({idbuku : idbuku}).exec();
+        
+        if(!data)
+            return res.status(500).send("Oops something gone wrong");
+
+        return res.json(data);
+    },
+
     async tambahMarker(req,res){
         const admin = await UserModel.findOne({nama : "admin"}).exec();
 
@@ -87,12 +126,31 @@ const BukuController =  {
         })
         
     },
-    updateMarker(req,res){
+    async updateMarker(req,res){
       
+        const {id} = req.params;
+        const body = req.body;
+        const data = await MarkerModel.updateOne({_id: id},body).exec();
+
+        if(!data)
+            return res.status(500).send("Oops something gone wrong");
+        
+        
+        return res.json(data)
+
+        
       
     },
-    deleteMarker(req,res){
+    async deleteMarker(req,res){
 
+        const {id} = req.params;
+        
+        const deleted  = MarkerModel.deleteOne({_id:id}).exec();
+
+        if(!deleted)
+            return res.status(500).send("Oops something gone wrong");
+        
+        return res.json(deleted);
     }
     
 }
