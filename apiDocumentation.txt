@@ -1,0 +1,45 @@
+==========================
+Menambahkan buku
+==========================
+/buku : post
+    body : {
+        judul ,
+        penulis
+    }
+
+==========================
+get semua buku
+==========================
+/buku : get
+
+    return {
+        data : [
+            {
+                _id,
+                judul,
+                penulis,
+                penambah,
+            }
+        ],
+        currentPage,
+        lastPage
+    }
+
+
+==========================
+get single buku
+==========================
+/buku/:id 
+    return {
+        _id,
+        judul,
+        penulis,
+        penambah,
+    }
+
+
+==========================
+update buku
+==========================
+
+
