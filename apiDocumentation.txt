@@ -1,16 +1,19 @@
 ==========================
 Menambahkan buku
 ==========================
-/buku : post
+/buku :post
+    request (
+
     body : {
-        judul ,
-        penulis
-    }
+            judul ,
+            penulis
+        }
+    )
 
 ==========================
 get semua buku
 ==========================
-/buku : get
+/buku :get
 
     return {
         data : [
@@ -29,7 +32,7 @@ get semua buku
 ==========================
 get single buku
 ==========================
-/buku/:id 
+/buku/:id :get
     return {
         _id,
         judul,
@@ -41,5 +44,87 @@ get single buku
 ==========================
 update buku
 ==========================
+/buku/:id :put
 
+request(
+    body : {
+        judul,
+        penulis
+    }
+)
+==========================
+Tambah Marker
+==========================
+/marker :post
 
+request(
+    body : {
+        idbuku,
+        kalimat,
+        halaman
+    }
+)
+
+return {
+    _id,
+    idbuku,
+    kalimat,
+    halaman
+}
+
+==========================
+Marker by buku
+==========================
+/marker/:id :get
+
+return {
+
+    data : [
+        {
+            _id,
+            idbuku,
+            kalimat,
+            halaman
+        }
+    ],
+    currentPage,
+    lastPage
+
+}
+==========================
+get semua marker
+==========================
+/marker :get
+
+return {
+
+    data : [
+        {
+            _id,
+            idbuku,
+            kalimat,
+            halaman
+        }
+    ],
+    currentPage,
+    lastPage
+
+}
+==========================
+update marker
+==========================
+/marker/:idmarker :put
+
+request(
+    {
+        kalimat ?,
+        halaman  ?
+    }
+)
+
+return {
+    _id,
+    idbuku,
+    kalimat,
+    halaman
+}
