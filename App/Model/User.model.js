@@ -6,4 +6,4 @@ const UserSchema = mongoose.Schema({
   photo: { type: String, default: "nophoto.jpg" },
   __v: { type: Number, select: false },
 });
-export default mongoose.model("user", UserSchema);
+export default mongoose.model("user", UserSchema, "user");

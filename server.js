@@ -1,5 +1,4 @@
 import express from "express";
-import mongoose from "mongoose";
 import routeroot from "./route/routeroot.js";
 import DatabaseConnection from "./App/Database/Connection.js";
 import cors from "cors";
